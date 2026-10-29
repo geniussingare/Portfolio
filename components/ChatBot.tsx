@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUp, Sparkles, X } from "lucide-react";
 import { Fragment, useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { profile } from "@/data/resume";
+import Logo from "./ui/Logo";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -162,8 +163,8 @@ export default function ChatBot() {
 
             {/* Header */}
             <div className="relative flex items-center gap-3 border-b border-white/10 px-4 py-3.5">
-              <span className="relative grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-violet via-pink to-cyan font-display text-sm font-bold text-white">
-                GS
+              <span className="relative grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-ink">
+                <Logo className="h-7 w-7" />
                 <span className="absolute -right-0.5 -bottom-0.5 h-3 w-3 rounded-full bg-emerald-400 ring-2 ring-[#0a0b18]" />
               </span>
               <div className="min-w-0 flex-1">

@@ -14,6 +14,17 @@ const ACCENTS = {
 } as const;
 
 function MetricBadge({ m }: { m: Metric }) {
+  const bar = (width: number, cls: string, delay: number) => (
+    <div className="h-2 flex-1 overflow-hidden rounded-full bg-white/[0.06]">
+      <motion.div
+        className={`h-full rounded-full ${cls}`}
+        initial={{ width: 0 }}
+        whileInView={{ width: `${width * 100}%` }}
+        viewport={{ once: true, margin: "-60px" }}
+        transition={{ duration: 1.1, delay, ease: [0.22, 1, 0.36, 1] }}
+      />
+    </div>
+  );
   return (
     <div className="mt-4 rounded-2xl border border-white/10 bg-black/30 p-4">
       <div className="flex flex-wrap items-center gap-3 font-display">
@@ -21,7 +32,17 @@ function MetricBadge({ m }: { m: Metric }) {
         <ArrowRight size={18} className="text-white/40" />
         <span className="text-gradient text-3xl font-bold tracking-tight">{m.after}</span>
       </div>
-      <p className="mt-1 font-mono text-[11px] tracking-wide text-white/45">{m.label}</p>
+      <div className="mt-3 space-y-1.5 font-mono text-[10px] text-white/40">
+        <div className="flex items-center gap-2">
+          <span className="w-12">before</span>
+          {m.ratio ? bar(1, "bg-pink/60", 0) : bar(1, "bg-[repeating-linear-gradient(45deg,#ec4899_0_6px,transparent_6px_12px)] opacity-70", 0)}
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="w-12">after</span>
+          {bar(m.ratio ?? 1, "bg-gradient-to-r from-violet to-cyan", 0.35)}
+        </div>
+      </div>
+      <p className="mt-2 font-mono text-[11px] tracking-wide text-white/45">{m.label}</p>
     </div>
   );
 }

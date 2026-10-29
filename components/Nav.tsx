@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { profile } from "@/data/resume";
+import Logo from "./ui/Logo";
 
 const LINKS = [
   { id: "about", label: "About" },
@@ -47,13 +48,11 @@ export default function Nav() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         className={`glass flex w-full max-w-5xl items-center justify-between rounded-full px-3 py-2 transition-all duration-500 ${
-          scrolled ? "bg-black/40" : ""
+          scrolled ? "bg-ink/80" : ""
         }`}
       >
         <a href="#top" className="group flex items-center gap-2 pl-2">
-          <span className="relative grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-violet via-pink to-cyan font-display text-sm font-bold text-white shadow-[0_0_24px_rgb(139_92_246/0.6)]">
-            GS
-          </span>
+          <Logo className="h-9 w-9 drop-shadow-[0_0_14px_rgb(139_92_246/0.55)] transition-transform duration-500 group-hover:rotate-[-20deg]" />
           <span className="hidden font-display font-semibold tracking-tight text-white sm:block">
             {profile.firstName}
             <span className="text-cyan">.</span>

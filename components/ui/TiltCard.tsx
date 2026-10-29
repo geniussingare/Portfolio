@@ -9,24 +9,30 @@ import {
 } from "framer-motion";
 import type { ReactNode, PointerEvent } from "react";
 
-/** Glass card that tilts in 3D toward the pointer and shows a moving spotlight. */
+/**
+ * Glass card that tilts in 3D toward the pointer and shows a moving spotlight.
+ * Pass `flat` for cards holding interactive content, where tilting would fight clicks and drags.
+ */
 export default function TiltCard({
   children,
   className = "",
   max = 10,
   glow = "139 92 246",
+  flat = false,
 }: {
   children: ReactNode;
   className?: string;
   max?: number;
   glow?: string;
+  flat?: boolean;
 }) {
   const x = useMotionValue(0.5);
   const y = useMotionValue(0.5);
   const sx = useSpring(x, { stiffness: 200, damping: 20 });
   const sy = useSpring(y, { stiffness: 200, damping: 20 });
-  const rotateX = useTransform(sy, [0, 1], [max, -max]);
-  const rotateY = useTransform(sx, [0, 1], [-max, max]);
+  const tilt = flat ? 0 : max;
+  const rotateX = useTransform(sy, [0, 1], [tilt, -tilt]);
+  const rotateY = useTransform(sx, [0, 1], [-tilt, tilt]);
   const px = useTransform(x, (v) => `${v * 100}%`);
   const py = useTransform(y, (v) => `${v * 100}%`);
   const spotlight = useMotionTemplate`radial-gradient(420px circle at ${px} ${py}, rgb(${glow} / 0.18), transparent 55%)`;
@@ -55,7 +61,7 @@ export default function TiltCard({
           className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
           style={{ background: spotlight }}
         />
-        <div style={{ transform: "translateZ(30px)" }} className="relative h-full">
+        <div style={flat ? undefined : { transform: "translateZ(30px)" }} className="relative h-full">
           {children}
         </div>
       </motion.div>

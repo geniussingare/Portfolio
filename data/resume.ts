@@ -100,7 +100,8 @@ export const skills: SkillGroup[] = [
   },
 ];
 
-export type Metric = { before: string; after: string; label: string };
+/** `ratio` is after ÷ before, used to size the comparison bars. */
+export type Metric = { before: string; after: string; label: string; ratio?: number };
 
 export type WorkItem = {
   title: string;
@@ -139,7 +140,7 @@ export const experience: {
         },
         {
           title: "Test Management Performance",
-          metric: { before: "~2.5 min", after: "<50 s", label: "Load time for 1,000 test cases (~70% faster)" },
+          metric: { before: "~2.5 min", after: "<50 s", label: "Load time for 1,000 test cases (~70% faster)", ratio: 0.33 },
           text: "Re-architected the module's backend using AQtime profiling and SQL query optimization.",
           tags: ["Profiling", "SQL optimization", "Backend architecture"],
         },
@@ -172,7 +173,7 @@ export const experience: {
       items: [
         {
           title: "Full-Text Search",
-          metric: { before: "60 s", after: "12 s", label: "Search time (80% faster, more accurate)" },
+          metric: { before: "60 s", after: "12 s", label: "Search time (80% faster, more accurate)", ratio: 0.2 },
           text: "Built a background text-indexing service that moved TopTeam from legacy word-per-row search to SQL Server Full-Text Search, indexing records in real time on change without blocking the main thread.",
           tags: ["SQL Server FTS", "Background indexing", "Real-time"],
         },
