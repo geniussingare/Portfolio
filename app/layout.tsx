@@ -15,11 +15,8 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  // Absolute base for link-preview images; GitHub Pages serves under /Portfolio.
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ??
-      `https://geniussingare.github.io${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/`
-  ),
+  // Absolute origin for link-preview images (Next adds the /Portfolio base path itself).
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://geniussingare.github.io"),
   title: "Ganesh Singare — Backend Engineer",
   description:
     "Backend Engineer with 3+ years building scalable Java, Spring Boot and microservice systems, REST APIs, and AI/RAG integrations.",
