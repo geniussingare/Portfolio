@@ -18,7 +18,7 @@ export const profile = {
   email: "geniussingare@gmail.com",
   linkedin: "https://linkedin.com/in/geniussingare",
   github: "https://github.com/geniussingare",
-  resume: "/Ganesh_Singare_Resume.pdf",
+  resume: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/Ganesh_Singare_Resume.pdf`,
 };
 
 export const stats = [

@@ -23,7 +23,7 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
-      <ChatBot />
+      {process.env.NEXT_PUBLIC_CHAT_ENABLED !== "false" && <ChatBot />}
     </>
   );
 }
